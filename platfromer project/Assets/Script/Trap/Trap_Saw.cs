@@ -1,9 +1,10 @@
 
+using JetBrains.Annotations;
 using Unity.VisualScripting;
 using Unity.VisualScripting.Dependencies.Sqlite;
 using UnityEngine;
 
-public class Trap_Saw : MonoBehaviour
+public class Trap_Saw : Trap
 {
     public Animator anim;
     public Transform[] movePositions;         // 톱니바퀴가 이동할 위치를 지정할 변수
@@ -14,7 +15,7 @@ public class Trap_Saw : MonoBehaviour
     {
         
         anim = GetComponent<Animator>();
-        isWorking = true();
+        isWorking = true;
     }
     private void Update()  // 컴퓨터 성능 영향을 받는다.
     {
@@ -38,8 +39,17 @@ public class Trap_Saw : MonoBehaviour
             moveIndex = 0;
         }
     }
-    protected override OnCollisionEnter2D(Collision2D collision)
+    protected override void OnCollisionEnter2D(Collision2D collision)
     {
         base.OnCollisionEnter2D(collision);
+    }
+    protected override void OnTriggerEnter2D(Collider2D collision)
+    {
+        base.OnTriggerEnter2D(collision);
+
+        if (collision.CompareTag("Player"))
+        {
+            Destroy(collision.gameObject);
+        }
     }
 }

@@ -15,7 +15,7 @@ public class Trap : MonoBehaviour
     // 
     // Collider 2D이고 Rigidbody 2D 여야한다. 필수조건
 
-    bool isWorking = false;
+    protected bool isWorking = false;
 
    protected virtual void OnCollisionEnter2D(Collision2D collision)
     {
